@@ -59,8 +59,8 @@ RCT_EXPORT_METHOD(showCallout:(nonnull NSNumber *)reactTag)
         if (![view isKindOfClass:[AIRMapMarker class]]) {
             RCTLogError(@"Invalid view returned from registry, expecting AIRMap, got: %@", view);
         } else {
-            [(AIRMapMarker *) view showCalloutView];
-        }
+            AIRMapMarker *marker = (AIRMapMarker *)view;
+            [marker.map selectAnnotation:marker animated:NO];        }
     }];
 }
 
@@ -71,7 +71,8 @@ RCT_EXPORT_METHOD(hideCallout:(nonnull NSNumber *)reactTag)
         if (![view isKindOfClass:[AIRMapMarker class]]) {
             RCTLogError(@"Invalid view returned from registry, expecting AIRMap, got: %@", view);
         } else {
-            [(AIRMapMarker *) view hideCalloutView];
+            AIRMapMarker *marker = (AIRMapMarker *)view;
+            [marker.map deselectAnnotation:marker animated:NO];
         }
     }];
 }
